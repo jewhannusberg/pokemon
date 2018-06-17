@@ -1,13 +1,17 @@
 library(shinydashboard)
 function(input, output) {
   
-  output$primTypes <- renderPlot({
-    ggplot(data = gen1, aes(Type.1)) + 
-      geom_bar() +
-      scale_color_brewer(type = 'div', palette = 15, direction = 1) +
-      xlab('Primary Type') + ylab('Count') + 
-      ggtitle('Primary Pokemon Types in Generation 1') + 
-      scale_fill_manual(values = wes_palette("FantasticFox1"))
-
+  output$types_matrix <- renderPlot({
+    ggplot(types_mat, aes(x = types_mat[, 2],y = types_mat[, 1], fill = types_mat[, 3])) + 
+      geom_tile() + 
+      scale_fill_manual(values = c('black', 'red','gray', "green")) +
+      labs(x = "Defense Type \n", y = "Attack Type \n", 
+           title = "Pokemon Type Chart", fill = "Attack Damage Multiplier \n") + 
+      theme(plot.title = element_text(hjust = 0.5), 
+            axis.title.x = element_text(face="bold", colour="#FF7A33", size = 12),
+            axis.title.y = element_text(face="bold", colour="#FF7A33", size = 12),
+            axis.text.x = element_text(angle = 90,vjust = 0.2, hjust = 1),
+            legend.title = element_text(face="bold", size = 10)) +
+      scale_x_discrete(position = "top")
   })  
 }
