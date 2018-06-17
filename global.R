@@ -63,7 +63,7 @@ types <- unique(df$Type.1)
 #          types)
 # rownames(type_mat) <- types
 types_mat <- expand.grid(types, types)
-types_mat <- as.data.frame(cartesianProd)
+types_mat <- as.data.frame(types_mat)
 
 types_mat[, 3] <- NA
 colnames(types_mat) <- c('attacker', 'defender', 'score')
