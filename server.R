@@ -6,14 +6,15 @@ function(input, output) {
   # }
   
   # keep only the selected pokemon in the dataframe
+  
   selectedData <- reactive({
-    gen1[gen1$Name %in% selected_pokemon, ] 
+    gen1[gen1$Name %in% c(input$pkmn1, input$pkmn2, input$pkmn3, input$pkmn4, input$pkmn5, input$pkmn6), ] 
   })
   
   
   
   output$summary <- renderTable(
-    selectedData
+    selectedData()
   )
   
   output$types_matrix <- renderPlot({
@@ -29,7 +30,7 @@ function(input, output) {
             legend.title = element_text(face="bold", size = 10)) +
       scale_x_discrete(position = "top")
   })  
-  selected_pokemon <- c(input$pkmn1, input$pkmn2, input$pkmn3, input$pkmn4, input$pkmn5, input$pkmn6)
+  
   
   
 }
