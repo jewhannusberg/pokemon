@@ -1,5 +1,20 @@
 library(shinydashboard)
+
 function(input, output) {
+  # strengths_weaknesses_graph <- function(pkmn, df){
+  #   
+  # }
+  
+  # keep only the selected pokemon in the dataframe
+  selectedData <- reactive({
+    gen1[gen1$Name %in% selected_pokemon, ] 
+  })
+  
+  
+  
+  output$summary <- renderTable(
+    selectedData
+  )
   
   output$types_matrix <- renderPlot({
     ggplot(types_mat, aes(x = types_mat[, 2],y = types_mat[, 1], fill = types_mat[, 3])) + 
@@ -14,4 +29,7 @@ function(input, output) {
             legend.title = element_text(face="bold", size = 10)) +
       scale_x_discrete(position = "top")
   })  
+  selected_pokemon <- c(input$pkmn1, input$pkmn2, input$pkmn3, input$pkmn4, input$pkmn5, input$pkmn6)
+  
+  
 }

@@ -54,6 +54,10 @@ construct_types_graph <- function(df){
 df = df %>% 
   distinct(X., .keep_all=TRUE)
 
+# filter to keep only generation 1 pokemon
+gen1 <- df %>% 
+  filter(Generation == 1)
+
 # how to build strengths and weaknesses graph?
 # series of if statements? 
 
@@ -74,4 +78,8 @@ types_mat <- construct_types_graph(types_mat)
 
 # turn to factors
 types_mat[, 3] <- as.factor(types_mat[, 3])
+
+names <- unique(gen1$Name)
+
+
 
